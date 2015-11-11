@@ -1,6 +1,7 @@
 #!/bin/bash -x
 export LANG=en_US # for dnf
 # Nov 7,'15 fails on fedora23: curl -sSL https://get.docker.com/ | sh
+# from http://docs.docker.com/machine/install-machine/
 cat >/etc/yum.repos.d/docker.repo <<-EOF
 [dockerrepo]
 name=Docker Repository
