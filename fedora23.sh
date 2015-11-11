@@ -15,5 +15,8 @@ dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine
 systemctl start docker # will take some time & will fail on secodn machine unless --bip :-/
 systemctl enable docker #boot at system time
 docker version
+docker pull busybox
+docker pull mysql
+docker pull centos
 # docker network inspect bridge
 # cat /usr/lib/systemd/system/docker.service
