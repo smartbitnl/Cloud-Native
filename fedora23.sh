@@ -13,10 +13,10 @@ EOF
 dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine wget bridge-utils
 systemctl start docker  # will take some time & might fail if VBox guest additions are not installed: "vagrant plugin install vagrant-vbguest"
 systemctl enable docker # boot at system time
-curl -L https://github.com/projectcalico/calico-docker/releases/download/v0.10.0/calicoctl -o /usr/bin/calicoctl # latest build @ http://www.projectcalico.org/latest/calicoctl
+curl -L --silent https://github.com/projectcalico/calico-docker/releases/download/v0.10.0/calicoctl -o /usr/bin/calicoctl # latest build @ http://www.projectcalico.org/latest/calicoctl
 chmod +x /usr/bin/calicoctl # see http://www.projectcalico.org/docker-libnetwork-is-almost-here-and-calico-is-ready/
 # see http://www.projectcalico.org/docker-libnetwork-is-almost-here-and-calico-is-ready/ ; latest etcd @ https://github.com/coreos/etcd/releases/
-curl -L https://github.com/coreos/etcd/releases/download/v2.2.1/etcd-v2.2.1-linux-amd64.tar.gz -o etcd-v2.2.1-linux-amd64.tar.gz
+curl -L --silent https://github.com/coreos/etcd/releases/download/v2.2.1/etcd-v2.2.1-linux-amd64.tar.gz -o etcd-v2.2.1-linux-amd64.tar.gz
 tar xzvf etcd-v2.2.1-linux-amd64.tar.gz
 cd etcd-v2.2.1-linux-amd64
 ./etcd --advertise-client-urls http://10.0.2.15:4001--listen-client-urls http://0.0.0.0:4001
