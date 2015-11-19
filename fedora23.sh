@@ -27,7 +27,9 @@ chmod +x /usr/bin/calicoctl # see http://www.projectcalico.org/docker-libnetwork
 curl -L --silent https://github.com/coreos/etcd/releases/download/v2.2.1/etcd-v2.2.1-linux-amd64.tar.gz -o etcd-linux-amd64.tar.gz
 tar xzf etcd-linux-amd64.tar.gz --exclude Documentation --exclude '*.md' -C /usr/bin --strip-components=1
 # this needs some work
-# ./etcd --advertise-client-urls http://10.0.2.15:4001 --listen-client-urls http://0.0.0.0:4001
+echo $1
+echo "./etcd --advertise-client-urls http://$1:4001 --listen-client-urls http://0.0.0.0:4001"
+./etcd --advertise-client-urls http://$1:4001 --listen-client-urls http://0.0.0.0:4001
 docker version
 etcd --version
 # docker network inspect bridge
