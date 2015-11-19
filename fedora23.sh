@@ -11,9 +11,10 @@ enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF
-dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine wget # bridge-utils traceroute
+dnf install -yq rpm dnf
+dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine wget bridge-utils traceroute
 # will take some time & might fail even if VBox Guest Additions are installed: "vagrant plugin install vagrant-vbguest"
-systemctl start docker  || { sleep 3; systemctl start docker } # retry once
+systemctl start docker # || { sleep 3; systemctl start docker } # retry once
 systemctl enable docker # boot at system time
 docker pull calico/node:v0.10.0 > /dev/null
 docker pull calico/node-libnetwork:v0.5.2 > /dev/null
