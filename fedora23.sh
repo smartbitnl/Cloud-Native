@@ -11,8 +11,9 @@ enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF
-dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine wget bridge-utils traceroute
+dnf install -yq python2 python2-dnf libselinux-python unzip nano docker-engine # wget bridge-utils traceroute
 # will take some time & might fail even if VBox Guest Additions are installed: "vagrant plugin install vagrant-vbguest"
+echo "systemctl start docker  || { sleep 3; systemctl start docker } # retry once"
 systemctl start docker  || { sleep 3; systemctl start docker } # retry once
 systemctl enable docker # boot at system time
 docker pull calico/node:v0.10.0 > /dev/null
@@ -26,7 +27,9 @@ chmod +x /usr/bin/calicoctl # see http://www.projectcalico.org/docker-libnetwork
 curl -L --silent https://github.com/coreos/etcd/releases/download/v2.2.1/etcd-v2.2.1-linux-amd64.tar.gz -o etcd-linux-amd64.tar.gz
 tar xzf etcd-linux-amd64.tar.gz --exclude Documentation --exclude '*.md' -C /usr/bin --strip-components=1
 # this needs some work
-# ./etcd --advertise-client-urls http://10.0.2.15:4001 --listen-client-urls http://0.0.0.0:4001
+echo $1
+echo "./etcd --advertise-client-urls http://$1:4001 --listen-client-urls http://0.0.0.0:4001"
+./etcd --advertise-client-urls http://$1:4001 --listen-client-urls http://0.0.0.0:4001
 docker version
 etcd --version
 # docker network inspect bridge
